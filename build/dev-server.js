@@ -34,7 +34,7 @@ var devMiddleware = require('webpack-dev-middleware')(compiler, {
 var options = {
   // target host
   // target: 'http://155.36.0.235:8080',
-  target: 'http://192.168.0.11:8080',
+  target: 'http://115.28.106.104:8080',
   changeOrigin: true,               // needed for virtual hosted sites
   ws: true                        // proxy websockets
 }

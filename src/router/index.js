@@ -1,29 +1,27 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Resource from 'vue-resource';
-import Hello from '../components/Hello';
-import home from '../project/home';
-import sale from '../components/children/sale';
-import chooseUser from '../components/children/chooseUser';
-import newUser from '../components/children/newUser';
-import forget from '../components/children/forget';
-import chooseEmployee from '../components/children/chooseEmployee';
-import saleSubmit from '../components/children/saleSubmit';
-import productItem from '../components/children/productItem';
-import chooseProduct from '../components/children/chooseProduct';
-import consume from '../components/children/consume';
-import addConsume from '../components/children/addConsume';
-import addMaterial from '../components/children/addMaterial';
-import chooseMaterial from '../components/children/chooseMaterial';
-import returns from '../components/children/return';
-import saleItem from '../components/children/saleItem';
-import owe from '../components/children/owe';
-import chooseStore from '../components/children/chooseStore';
-import chooseUserSale from '../components/children/chooseUser-sale';
-import newUserSale from '../components/children/newUserSale';
-import salesStatistics from '../components/children/sales statistics';
-import login from '../components/login';
-import {LOGIN, CONSUMER, SALERECORD, PRODUCTITEMS} from '../common/js/const';
+import welcome from '../components/login/Hello';
+import login from '../components/login/login';
+import forget from '../components/login/forget';
+import home from '../components/home/home';
+import chooseStore from '../components/home/chooseStore';
+import sale from '../components/sale/sale';
+import saleSubmit from '../components/sale/saleSubmit';
+import productItem from '../components/sale/productItem';
+import chooseProduct from '../components/sale/chooseProduct';
+import salesStatistics from '../components/sale/salesStatistics';
+import consume from '../components/consume/consume';
+import addConsume from '../components/consume/addConsume';
+import addMaterial from '../components/consume/addMaterial';
+import chooseMaterial from '../components/consume/chooseMaterial';
+import owe from '../components/owe/owe';
+import returns from '../components/return/return';
+import chooseEmployee from '../components/common/chooseEmployee';
+import chooseUser from '../components/common/chooseUser';
+import saleItem from '../components/common/saleItem';
+import newUser from '../components/common/newUser';
+import {LOGIN, SALERECORD, CONSUMERADD, RETURNADD, SALERECORDADD, OWNRECORDADD, USERRECORDADD, CUSTOMERACCOUNT} from '../common/js/const';
 import { Indicator } from 'mint-ui';
 Vue.use(Router);
 Vue.use(Resource);
@@ -31,8 +29,8 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
+      name: 'welcome',
+      component: welcome
     },
     {
       path: '/login',
@@ -125,16 +123,6 @@ const router = new Router({
       component: chooseStore
     },
     {
-      path: '/chooseUserSale',
-      name: 'chooseUserSale',
-      component: chooseUserSale
-    },
-    {
-      path: '/newUserSale',
-      name: 'newUserSale',
-      component: newUserSale
-    },
-    {
       path: '/salesStatistics',
       name: 'salesStatistics',
       component: salesStatistics
@@ -143,9 +131,11 @@ const router = new Router({
 });
 Vue.http.interceptors.push((request, next) => {
   let url = request.url;
-  if (String(url).indexOf(LOGIN) >= 0 || String(url).indexOf(CONSUMER) >= 0 ||
-    String(url).indexOf(SALERECORD) >= 0 || String(url).indexOf(PRODUCTITEMS) >= 0) {
+  if (String(url).indexOf(LOGIN) >= 0 ||
+    String(url).indexOf(SALERECORD) >= 0 || String(url).indexOf(CUSTOMERACCOUNT) >= 0) {
     Indicator.open({text: '加载中', spinnerType: 'fading-circle'});
+  } else if (String(url).indexOf(CONSUMERADD) >= 0 || String(url).indexOf(OWNRECORDADD) >= 0 || String(url).indexOf(SALERECORDADD) >= 0 || String(url).indexOf(RETURNADD) >= 0 || String(url).indexOf(USERRECORDADD) >= 0) {
+    Indicator.open({text: '提交中', spinnerType: 'fading-circle'});
   }
   next((response) => {
     Indicator.close();
