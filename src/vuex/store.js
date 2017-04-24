@@ -3,6 +3,10 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
+    allCustomer: Object,
+    allEmployee: Object,
+    allProductAndTreatment: Object,
+    treatmentInfoMap: Object,
     storeInfo: String,
     currentConsumerInfo: String,
     selectProductInfo: String,
@@ -14,9 +18,29 @@ const store = new Vuex.Store({
     currentSaleItemInfo: String,
     currentSelectMaterial: String,
     currentConsumeInfo: Object,
-    currentSaleRecord: Object
+    currentSaleRecord: Object,
+    saleRecord: Object,
+    origin: String
   },
   mutations: {
+    SETTREATMENTINFOMAP (state, treatmentInfoMap) {
+      state.treatmentInfoMap = treatmentInfoMap;
+    },
+    SETALLCUSTOMER (state, allCustomer) {
+      state.allCustomer = allCustomer;
+    },
+    SETALLEMPLOYEE (state, allEmployee) {
+      state.allEmployee = allEmployee;
+    },
+    SETALLPRODUCTANDTREATMENT (state, allProductAndTreatment) {
+      state.allProductAndTreatment = allProductAndTreatment;
+    },
+    SETORIGIN (state, origin) {
+      state.origin = origin;
+    },
+    SETSALERECORD (state, saleRecord) {
+      state.saleRecord = saleRecord;
+    },
     SETSTOREINFO (state, storeInfo) {
       state.storeInfo = storeInfo;
     },
@@ -73,6 +97,9 @@ const store = new Vuex.Store({
       state.selectConsultInfo = undefined;
       state.selectSaleInfo = undefined;
       state.selectAddConsumer = undefined;
+      state.allCustomer = undefined;
+      state.allEmployee = undefined;
+      state.allProductAndTreatment = undefined;
     }
   },
   getters: {
@@ -111,6 +138,24 @@ const store = new Vuex.Store({
     },
     getCurrentSaleForm: state => {
       return state.currentSaleRecord;
+    },
+    getSaleRecord: state => {
+      return state.saleRecord;
+    },
+    getOrigin: state => {
+      return state.origin;
+    },
+    getAllCustomer: state => {
+      return state.allCustomer;
+    },
+    getAllEmployee: state => {
+      return state.allEmployee;
+    },
+    getAllProductAndTreatment: state => {
+      return state.allProductAndTreatment;
+    },
+    getTreatmentInfoMap: state => {
+      return state.treatmentInfoMap;
     }
   }
 });
