@@ -11,7 +11,7 @@
         <div class="count-commission">手工操作：{{percentage.operate}}</div>
       </div>
       <div class="store-count">
-        <p>当前门店：{{store.name}} <router-link to="/chooseStore" slot="left"><mt-button type="primary" class="btn-small"> 切 换 </mt-button></router-link></p>
+        <p>当前门店：<span>{{store.name}}</span><router-link to="/chooseStore" slot="left"><mt-button type="primary" class="btn-small"> 切 换 </mt-button></router-link></p>
       </div>
       <div class="function-count">
         <p>业务功能</p>
@@ -171,7 +171,7 @@ export default {
     },
     destoryData () {
       this.store.id = 0;
-      this.store.name = '';
+      this.store.name = '请选择门店';
       window.sessionStorage.setItem('loginUser', '');
       this.$store.commit('RESET');
     },
