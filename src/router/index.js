@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Resource from 'vue-resource';
-import welcome from '../components/login/Hello';
 import login from '../components/login/login';
 import forget from '../components/login/forget';
 import home from '../components/home/home';
@@ -23,14 +22,15 @@ import saleItem from '../components/common/saleItem';
 import newUser from '../components/common/newUser';
 import {LOGIN, SALERECORD, CONSUMERADD, RETURNADD, SALERECORDADD, OWNRECORDADD, USERRECORDADD, CUSTOMERACCOUNT} from '../common/js/const';
 import { Indicator } from 'mint-ui';
+import { MessageBox } from 'mint-ui';
 Vue.use(Router);
 Vue.use(Resource);
 const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'welcome',
-      component: welcome
+      name: 'login',
+      component: login
     },
     {
       path: '/login',
@@ -138,7 +138,11 @@ Vue.http.interceptors.push((request, next) => {
     Indicator.open({text: '提交中', spinnerType: 'fading-circle'});
   }
   next((response) => {
+    let status = response.status;
     Indicator.close();
+    if (String(status).indexOf('5') === 0) {
+      MessageBox({title: '', message: '服务器异常'});
+    }
     return response;
   });
 });
